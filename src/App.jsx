@@ -19,8 +19,13 @@ export default function App() {
         const response = await fetch("https://tech-assessment-steel.vercel.app/api/companies");
         if (!response.ok) throw new Error("Failed to fetch data");
         const data = await response.json();
-        // console.log(data)
-        setCompanies(data);
+
+        const sortedData = data.sort((a, b) =>
+          a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+        );
+
+        setCompanies(sortedData);
+
         setLoading(false);
 
         if (!toastShown.current) {
